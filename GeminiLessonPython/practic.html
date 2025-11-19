@@ -11,10 +11,21 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
         .font-mono { font-family: 'Roboto Mono', monospace; }
         html { scroll-behavior: smooth; }
-        
+
         .code-block { background-color: #1e293b; color: #e2e8f0; }
         .solution-panel { border-left: 4px solid #10b981; background-color: #f0fdf4; }
         .nav-link.active { background-color: #ecfdf5; color: #047857; border-right: 4px solid #047857; font-weight: 700; }
+
+        /* Styles for back-to-lecture button */
+        .practicum-btn { transition: transform .12s ease; }
+        .practicum-btn:active { transform: scale(.98); }
+        .floating-back {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 60;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -25,6 +36,13 @@
             <div class="mb-10">
                 <h2 class="text-2xl font-extrabold text-emerald-700 tracking-tight">Python <span class="text-slate-800">Практикум</span></h2>
                 <p class="text-xs text-slate-500 mt-2 font-medium uppercase">Сборник задач</p>
+                    <div class="mt-4">
+                    <a id="sidebar-back" href="../lecture.html" title="Вернуться в лекцию" class="practicum-btn inline-flex items-center gap-2 bg-indigo-600 text-white text-xs font-semibold py-2 px-3 rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                        <!-- иконка стрелки -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0L2.586 11H14a1 1 0 110 2H4.414l3.293 3.293a1 1 0 01-1.414 1.414l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L4.414 9H14a3 3 0 010 6H7.707z" clip-rule="evenodd"/></svg>
+                        Вернуться к лекции
+                    </a>
+                </div>
             </div>
             <ul class="space-y-1 text-sm font-medium">
                 <li><a href="#task1" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition">1. Переменные (Чек)</a></li>
@@ -510,4 +528,5 @@ for i in range(len(nums)):
         });
     </script>
 </body>
+
 </html>
