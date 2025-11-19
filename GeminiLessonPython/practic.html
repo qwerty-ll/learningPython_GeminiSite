@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Практикум: Задачи с разбором</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
+        .font-mono { font-family: 'Roboto Mono', monospace; }
+        html { scroll-behavior: smooth; }
+        
+        .code-block { background-color: #1e293b; color: #e2e8f0; }
+        .solution-panel { border-left: 4px solid #10b981; background-color: #f0fdf4; }
+        .nav-link.active { background-color: #ecfdf5; color: #047857; border-right: 4px solid #047857; font-weight: 700; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Навигация -->
+        <nav id="sidebar" class="w-full lg:w-72 lg:h-screen lg:fixed top-0 left-0 bg-white border-r border-slate-200 p-6 overflow-y-auto z-20 shadow-lg">
+            <div class="mb-10">
+                <h2 class="text-2xl font-extrabold text-emerald-700 tracking-tight">Python <span class="text-slate-800">Практикум</span></h2>
+                <p class="text-xs text-slate-500 mt-2 font-medium uppercase">Сборник задач</p>
+            </div>
+            <ul class="space-y-1 text-sm font-medium">
+                <li><a href="#task1" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition">1. Переменные (Чек)</a></li>
+                <li><a href="#task2" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition">2. Логика (Пароль)</a></li>
+                <li><a href="#task3" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition">3. Списки (Максимум)</a></li>
+                <li><a href="#task4" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition bg-red-50 text-red-700 font-bold">4. PRO: Индексы (Рост)</a></li>
+                <li><a href="#task5" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition">5. Срезы (Палиндром)</a></li>
+                <li><a href="#task6" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition">6. Функции (Температура)</a></li>
+                
+                <li class="pt-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Циклы и Списки</li>
+                <li><a href="#task7" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-blue-700">7. Сумма пар</a></li>
+                <li><a href="#task8" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-blue-700">8. Сумма троек</a></li>
+                <li><a href="#task9" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-blue-700">9. Локальные пики</a></li>
+                <li><a href="#task10" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition">10. Фильтр (Четные)</a></li>
+                <li><a href="#task11" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition">11. Поиск (Break)</a></li>
+
+                <li class="pt-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Новые задачи (Mix)</li>
+                <li><a href="#task12" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-purple-700">12. Строки: Гласные</a></li>
+                <li><a href="#task13" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-purple-700">13. Разворот списка</a></li>
+                <li><a href="#task14" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-purple-700">14. Високосный год</a></li>
+                <li><a href="#task15" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-purple-700">15. Факториал</a></li>
+                <li><a href="#task16" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-purple-700">16. Уникальные</a></li>
+                <li><a href="#task17" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-purple-700">17. Очистка данных</a></li>
+                <li><a href="#task18" class="nav-link block py-2 px-3 rounded hover:bg-slate-50 transition text-purple-700">18. Two Sum (Сложно)</a></li>
+            </ul>
+        </nav>
+
+        <!-- Основная зона -->
+        <main class="lg:ml-72 p-6 lg:p-16 w-full max-w-5xl mx-auto">
+            
+            <header class="mb-16 border-b pb-8">
+                <h1 class="text-4xl font-bold text-slate-900 mb-4">Решение задач</h1>
+                <p class="text-lg text-slate-600">Здесь собраны типовые задачи. Попробуйте понять условие, решите "на бумаге", а затем откройте разбор.</p>
+            </header>
+
+            <!-- Задача 1 -->
+            <section id="task1" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">1. Фискальный чек</h2>
+                        <p class="text-slate-700">Вывести строку: <code>"Итого за [Товар]: [Сумма] руб."</code></p>
+                        <div class="bg-slate-50 p-3 mt-4 rounded border font-mono text-sm">item="Кофе", price=150, qty=2</div>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol1')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded shadow-lg">👁 Разбор</button>
+                        <div id="sol1" class="hidden mt-6 solution-panel p-6 rounded">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">total = price * qty
+print(f"Итого за {item}: {total} руб.")</code></pre></div>
+                            <p class="text-slate-700">Используем f-строки для вставки переменных.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 2 -->
+            <section id="task2" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">2. Валидатор пароля</h2>
+                        <p class="text-slate-700">< 6 символов -> "Слабый", > 12 -> "Длинный", иначе "Принят".</p>
+                        <div class="bg-slate-50 p-3 mt-4 rounded border font-mono text-sm">password = "Secret123"</div>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol2')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded shadow-lg">👁 Разбор</button>
+                        <div id="sol2" class="hidden mt-6 solution-panel p-6 rounded">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">length = len(password)
+if length < 6:
+    print("Слабый")
+elif length > 12:
+    print("Слишком длинный")
+else:
+    print("Принят")</code></pre></div>
+                            <p class="text-slate-700">Важен порядок проверок. <code>elif</code> срабатывает, только если <code>if</code> ложен.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 3 -->
+            <section id="task3" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">3. Поиск максимума</h2>
+                        <p class="text-slate-700">Найти самое большое число циклом (без <code>max()</code>).</p>
+                        <div class="bg-slate-50 p-3 mt-4 rounded border font-mono text-sm">numbers = [10, 50, 20, 95, 5]</div>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol3')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded shadow-lg">👁 Разбор</button>
+                        <div id="sol3" class="hidden mt-6 solution-panel p-6 rounded">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">winner = numbers[0]
+for num in numbers:
+    if num > winner:
+        winner = num
+print(winner)</code></pre></div>
+                            <p class="text-slate-700">Берем первый элемент за "царя горы" и сравниваем остальных с ним.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 4 -->
+            <section id="task4" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-xl border-2 border-red-100 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100 bg-red-50/10">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">4. PRO: Строгий рост</h2>
+                        <p class="text-slate-700">Проверить, что список строго возрастает (1, 2, 5, 9 -> True).</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol4')" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded shadow-lg">👁 Разбор (Сложно)</button>
+                        <div id="sol4" class="hidden mt-6 solution-panel p-6 rounded border-l-red-500 bg-red-50">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">is_growing = True
+# Идем до ПРЕДПОСЛЕДНЕГО элемента
+for i in range(len(data) - 1):
+    if data[i] >= data[i+1]: # Если текущий больше или равен следующему
+        is_growing = False
+        break
+print(is_growing)</code></pre></div>
+                            <p class="text-slate-700">Ключ: <code>range(len(data) - 1)</code>. Иначе при <code>i+1</code> мы вылетим за границу.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 5 -->
+            <section id="task5" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">5. Палиндром</h2>
+                        <p class="text-slate-700">Проверить слово на чтение задом наперед ("radar").</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol5')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded shadow-lg">👁 Разбор</button>
+                        <div id="sol5" class="hidden mt-6 solution-panel p-6 rounded">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">if word == word[::-1]:
+    print("Палиндром")</code></pre></div>
+                            <p class="text-slate-700">Срез <code>[::-1]</code> переворачивает строку.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 6 -->
+            <section id="task6" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">6. Функция температуры</h2>
+                        <p class="text-slate-700">Функция принимает C, возвращает F. Формула: <code>C * 1.8 + 32</code>.</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol6')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded shadow-lg">👁 Разбор</button>
+                        <div id="sol6" class="hidden mt-6 solution-panel p-6 rounded">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">def c_to_f(c):
+    return c * 1.8 + 32
+
+print(c_to_f(25))</code></pre></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 7 -->
+            <section id="task7" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-xl border-2 border-blue-100 overflow-hidden">
+                    <div class="p-8 border-b border-blue-50 bg-blue-50/30">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">7. Сумма соседних пар</h2>
+                        <p class="text-slate-700 mb-4">Создать новый список сумм: [10, 20, 30] -> [30, 50].</p>
+                    </div>
+                    <div class="p-8 bg-white">
+                        <button onclick="toggleSolution('sol7')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Решение</button>
+                        <div id="sol7" class="hidden mt-6 solution-panel p-6 rounded-r-lg border-l-blue-500 bg-blue-50">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">result = []
+for i in range(len(nums) - 1):
+    result.append(nums[i] + nums[i+1])</code></pre></div>
+                            <p class="text-slate-700">Остановка на <code>len - 1</code>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 8 -->
+            <section id="task8" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">8. Сумма троек</h2>
+                        <p class="text-slate-700">Сумма текущего + следующего + послеследующего.</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol8')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Решение</button>
+                        <div id="sol8" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">for i in range(len(nums) - 2):
+    summ = nums[i] + nums[i+1] + nums[i+2]</code></pre></div>
+                            <p class="text-slate-700">Остановка на <code>len - 2</code>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 9 -->
+            <section id="task9" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">9. Локальные пики</h2>
+                        <p class="text-slate-700">Найти элементы больше обоих соседей (слева и справа).</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol9')" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Решение</button>
+                        <div id="sol9" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python"># range(1, len-1) чтобы были соседи и слева и справа
+for i in range(1, len(data) - 1):
+    if data[i] > data[i-1] and data[i] > data[i+1]:
+        count += 1</code></pre></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 10 -->
+            <section id="task10" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">10. Сколько четных?</h2>
+                        <p class="text-slate-700">Посчитать количество четных чисел в списке.</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol10')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Решение</button>
+                        <div id="sol10" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">count = 0
+for x in nums:
+    if x % 2 == 0: # Остаток от деления на 2
+        count += 1</code></pre></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 11 -->
+            <section id="task11" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">11. Найти индекс (Break)</h2>
+                        <p class="text-slate-700">Найти позицию числа 50 и остановить цикл.</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol11')" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Решение</button>
+                        <div id="sol11" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">for i in range(len(data)):
+    if data[i] == 50:
+        print(i)
+        break # Останавливаем поиск</code></pre></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ================= НОВЫЕ ЗАДАЧИ (MIX) ================= -->
+            
+            <div class="mb-10 border-t border-slate-300 pt-10">
+                <h2 class="text-3xl font-bold text-purple-800 text-center">Разнообразные задачи (Mix)</h2>
+            </div>
+
+            <!-- Задача 12 -->
+            <section id="task12" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase">Строки + Циклы</span>
+                            <h2 class="text-2xl font-bold text-slate-800">12. Подсчет гласных</h2>
+                        </div>
+                        <p class="text-slate-700">Посчитайте, сколько гласных букв (a, e, i, o, u) в строке "Python Automation". Регистр не важен.</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol12')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Показать решение</button>
+                        <div id="sol12" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">text = "Python Automation"
+vowels = "aeiou"
+count = 0
+
+for char in text.lower(): # Приводим к маленьким буквам
+    if char in vowels:    # Проверка "входит ли в список"
+        count += 1
+
+print(count)</code></pre></div>
+                            <p class="text-slate-700"><code>char in vowels</code> — очень удобная конструкция в Python. Она заменяет кучу <code>if char == 'a' or char == 'e'...</code></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 13 -->
+            <section id="task13" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase">Алгоритм</span>
+                            <h2 class="text-2xl font-bold text-slate-800">13. Разворот списка (вручную)</h2>
+                        </div>
+                        <p class="text-slate-700">Не используя <code>[::-1]</code> или <code>reverse()</code>, создайте новый список, где элементы идут в обратном порядке.</p>
+                        <div class="bg-slate-50 p-3 mt-4 rounded border font-mono text-sm">Вход: [1, 2, 3] -> Выход: [3, 2, 1]</div>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol13')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Показать решение</button>
+                        <div id="sol13" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">source = [1, 2, 3]
+reversed_list = []
+
+for item in source:
+    # Вставляем каждый новый элемент в НАЧАЛО списка
+    reversed_list.insert(0, item)
+
+print(reversed_list)</code></pre></div>
+                            <p class="text-slate-700"><code>insert(0, item)</code> добавляет элемент на позицию 0, сдвигая всё остальное вправо. Так мы получаем обратный порядок.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 14 -->
+            <section id="task14" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-bold uppercase">Логика</span>
+                            <h2 class="text-2xl font-bold text-slate-800">14. Високосный год</h2>
+                        </div>
+                        <p class="text-slate-700">Классическая задача. Год високосный, если он делится на 4, НО не делится на 100 (кроме случаев, когда делится на 400).</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol14')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Показать решение</button>
+                        <div id="sol14" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">year = 2024
+
+if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+    print("Високосный")
+else:
+    print("Обычный")</code></pre></div>
+                            <p class="text-slate-700">Здесь важно правильно расставить скобки и приоритеты <code>and</code> / <code>or</code>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 15 -->
+            <section id="task15" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase">Математика</span>
+                            <h2 class="text-2xl font-bold text-slate-800">15. Факториал</h2>
+                        </div>
+                        <p class="text-slate-700">Посчитать произведение чисел от 1 до N (факториал). Например, 5! = 1*2*3*4*5 = 120.</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol15')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Показать решение</button>
+                        <div id="sol15" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">n = 5
+result = 1
+
+# range(1, n + 1), чтобы включить само число n
+for i in range(1, n + 1):
+    result = result * i
+
+print(result)</code></pre></div>
+                            <p class="text-slate-700">Важно начать <code>result</code> с 1, а не с 0, иначе всё умножение даст 0.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 16 -->
+            <section id="task16" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase">Списки</span>
+                            <h2 class="text-2xl font-bold text-slate-800">16. Только уникальные</h2>
+                        </div>
+                        <p class="text-slate-700">Удалить дубликаты из списка [1, 2, 2, 3, 3, 3], оставив только уникальные значения.</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol16')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Показать решение</button>
+                        <div id="sol16" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">data = [1, 2, 2, 3, 3, 3]
+unique = []
+
+for item in data:
+    if item not in unique: # Если еще не добавляли
+        unique.append(item)
+
+print(unique)</code></pre></div>
+                            <p class="text-slate-700">Мы создаем новый список и добавляем туда элементы только если их там еще нет (<code>not in</code>).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 17 -->
+            <section id="task17" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-8 border-b border-slate-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase">Очистка данных</span>
+                            <h2 class="text-2xl font-bold text-slate-800">17. Очистка номера телефона</h2>
+                        </div>
+                        <p class="text-slate-700">Вам дан грязный номер "+7 (999) 123-45-67". Оставьте в нем только цифры.</p>
+                    </div>
+                    <div class="p-8 bg-slate-50">
+                        <button onclick="toggleSolution('sol17')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Показать решение</button>
+                        <div id="sol17" class="hidden mt-6 solution-panel p-6 rounded-r-lg">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">phone = "+7 (999) 123-45-67"
+clean_phone = ""
+
+for char in phone:
+    if char.isdigit(): # Метод проверяет, является ли символ цифрой
+        clean_phone += char
+
+print(clean_phone)</code></pre></div>
+                            <p class="text-slate-700"><code>isdigit()</code> — удобный метод строк. Мы собираем новую строку символ за символом.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Задача 18 -->
+            <section id="task18" class="mb-20">
+                <div class="bg-white rounded-2xl shadow-xl border-2 border-purple-200 overflow-hidden">
+                    <div class="p-8 border-b border-purple-50 bg-purple-50/30">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase">Хардкор</span>
+                            <h2 class="text-2xl font-bold text-slate-800">18. Two Sum (Поиск пары)</h2>
+                        </div>
+                        <p class="text-slate-700">
+                            Дан список <code>[3, 5, 10, 4]</code> и целевая сумма <code>9</code>.<br>
+                            Нужно найти два числа, которые в сумме дают 9. Используйте вложенные циклы.
+                        </p>
+                    </div>
+                    <div class="p-8 bg-white">
+                        <button onclick="toggleSolution('sol18')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg">👁 Показать решение</button>
+                        <div id="sol18" class="hidden mt-6 solution-panel p-6 rounded-r-lg border-l-purple-500 bg-purple-50">
+                            <div class="code-block p-4 rounded mb-4"><pre><code class="language-python">nums = [3, 5, 10, 4]
+target = 9
+
+for i in range(len(nums)):
+    for j in range(i + 1, len(nums)): # j всегда больше i, чтобы не брать то же число
+        if nums[i] + nums[j] == target:
+            print(f"Найдено: {nums[i]} + {nums[j]} = {target}")</code></pre></div>
+                            <p class="text-slate-700">Вложенный цикл позволяет сравнить каждый элемент с каждым. Мы начинаем <code>j</code> с <code>i + 1</code>, чтобы не сравнивать элемент с самим собой и не дублировать пары.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        function toggleSolution(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.5s';
+                    el.style.opacity = 1;
+                }, 10);
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+                        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                        if(activeLink) activeLink.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+        });
+    </script>
+</body>
+</html>
